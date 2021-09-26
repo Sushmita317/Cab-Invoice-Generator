@@ -1,4 +1,5 @@
 package com.bridgedlab;
+
 public class InvoiceGenerator {
 
     /**
@@ -16,12 +17,27 @@ public class InvoiceGenerator {
      *
      * Condition : If minimum total fare is less than the MINIMUM_FARE, return MINIMUM_FARE
      *
-     * @sushmita distance
+     * @ distance
      * @sushmita time
      */
     public double calculateFare(double distance, int time) {
         double totalFare = distance * MINIMUM_COST_PER_KM + time * COST_PER_TIME;
 
         return Math.max(totalFare, MINIMUM_FARE);
+    }
+
+    /**
+     * Purpose : Given distance and time for multiple rides,
+     *           Return aggregate total fare for all the journey
+     *
+     * @sushmita rides
+     * @return
+     */
+    public double calculateTotalFare(Ride[] rides) {
+        double totalFare = 0.0;
+        for(Ride ride : rides) {
+            totalFare += this.calculateFare(ride.distance, ride.time);
+        }
+        return totalFare;
     }
 }
